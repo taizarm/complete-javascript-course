@@ -10,9 +10,7 @@ GAME RULES:
 */
 
 
-var activePlayer, scores, roundScore, gamePlaying, dice, previousDice;
-
-var maxPoints = 20;
+var activePlayer, scores, roundScore, gamePlaying, dice, previousDice, winningScore;
 
 init();
 
@@ -56,7 +54,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         document.getElementById('current-' + activePlayer).textContent = 0;
 
         // 3. Check if player won
-        if (scores[activePlayer] >= maxPoints) {
+        if (scores[activePlayer] >= winningScore) {
             document.getElementById('name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -88,6 +86,9 @@ function init() {
     scores = [0, 0];
     roundScore = 0;
     gamePlaying = true;
+
+    //Read winning score
+    winningScore = document.getElementById('winningScore').value;
 
     document.querySelector('.dice').style.display = 'none';
     document.getElementById('score-0').textContent = '0';
