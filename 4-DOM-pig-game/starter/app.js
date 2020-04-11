@@ -10,7 +10,7 @@ GAME RULES:
 */
 
 
-var activePlayer, scores, roundScore, gamePlaying, dice;
+var activePlayer, scores, roundScore, gamePlaying, dice, previousDice;
 
 var maxPoints = 20;
 
@@ -30,7 +30,13 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
         // 3. Update the round score IF dice is not 1
-        if (dice !== 1) {
+        //    Check if player has two 6 dices in a row
+        if (previousDice === 6 && dice === 6) {
+            scores[activePlayer] = 0;
+            document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+
+            nextPlayer();
+        } else if (dice !== 1) {
             roundScore += dice
             document.getElementById('current-' + activePlayer).textContent = roundScore;
         } else {
